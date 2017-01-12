@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TOEFL - Développement durable</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="light">
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="./bower_components/angular-material-icons/angular-material-icons.css"/>
+    <link rel="stylesheet" href="./bower_components/ngprogress/ngProgress.css"/>
+    
+    <link rel="stylesheet" href="assets/app.css"/>
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="assets/css/layout.css"/>
+    <script type="text/javascript">
+                 myFunction = function() {
+                     $(".basicContent").removeClass("cardContent");
+                     $(".seeMore").addClass("hide");
+//                    document.getElementById("cardContent").classList.remove("cardContent");
+//                    document.getElementById("seeMore").classList.add("hide");
+                };
+                returnToTop = function(){
+                    $("#topDiv").animate({scrollTop: 0}, 'slow');
+//                    alert("test");
+                };
+                
+                
+    </script>   
+</head>
+
+<body ng-app="mainApp" layout="row" ng-controller="LayoutController" ng-cloak>
+
+<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left">
+
+    <header class="nav-header">
+        <a ng-href="#/" class="docs-logo" href="#/">
+            <img src="./assets/img/logo_utbm.png" alt="">
+            <h1 class="docs-logotype md-heading">TOEFL</h1>
+        </a>
+    </header>
+
+
+
+    <md-content flex role="navigation">
+        <ul class="docs-menu">
+            <li ng-repeat="section in menu.sections" class="parent-list-item {{section.className || ''}}" ng-class="{'parentActive' : isSectionSelected(section)}">
+                <h2 class="menu-heading md-subhead" ng-if="section.type === 'heading'" id="heading_{{ section.name }}">
+                    <a style="color: black" ng-if="section.name === 'Cours'" href="/app/index.html#/learning/list">{{section.name}}</a><!--
+-->                    <li ng-if="section.name === 'Exercices'">{{section.name}}</li>
+<!--                {{section.name}}-->
+                </h2>
+                <menu-link section="section" ng-if="section.type === 'link'"></menu-link>
+
+                <menu-toggle section="section" ng-if="section.type === 'toggle'"></menu-toggle>
+
+                <ul ng-if="section.children" class="menu-nested-list">
+                    <li ng-repeat="child in section.children" ng-class="{'childActive' : isSectionSelected(child)}">
+                        <menu-link section="child" ng-if="child.type === 'link'"></menu-link>
+
+                        <menu-toggle section="child" ng-if="child.type === 'toggle'"></menu-toggle>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </md-content>
+</md-sidenav>
+
+
+
+<div layout="column" tabIndex="-1" role="main" flex>
+    <md-toolbar class="md-whiteframe-glow-z1 site-content-toolbar">
+
+        <div class="md-toolbar-tools docs-toolbar-tools" ng-click="openMenu()" tabIndex="-1">
+            <md-button class="md-icon-button" hide-gt-sm aria-label="Toggle Menu">
+                <md-icon md-svg-src="assets/svg/menu.svg"></md-icon>
+            </md-button>
+            <div layout="row" flex class="fill-height">
+                <h2 class="md-toolbar-item md-breadcrumb md-headline">
+                    <span ng-if="menu.currentPage.name !== menu.currentSection.name">
+                      <span hide-sm hide-md>{{menu.currentSection.name}}</span>
+                      <span class="docs-menu-separator-icon" hide-sm hide-md style="transform: translate3d(0, 1px, 0)">
+                        <span class="md-visually-hidden">-</span>
+                        <md-icon
+                                aria-hidden="true"
+                                md-svg-src="img/icons/ic_chevron_right_24px.svg"
+                                style="transform:translateY(-2px)"></md-icon>
+                      </span>
+                    </span>
+                    <span class="md-breadcrumb-page">{{menu.currentPage | humanizeDoc}}</span>
+                </h2>
+
+                <span flex></span> <!-- use up the empty space -->
+
+            </div>
+        </div>
+
+    </md-toolbar>
+
+    <md-content ng-view md-scroll-y flex layout-padding class="toefl-content"></md-content>
+
+</div>
+
+<script src ="./bower_components/jQuery/dist/jquery.min.js"></script>
+
+<script src="./bower_components/angular/angular.js"></script>
+<script src="./bower_components/angular-animate/angular-animate.js"></script>
+<script src="./bower_components/angular-aria/angular-aria.js"></script>
+<script src="./bower_components/angular-route/angular-route.min.js"></script>
+
+
+<script src="./bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="./bower_components/showdown/compressed/Showdown.min.js"></script>
+<script src="./bower_components/angular-markdown-directive/markdown.js"></script>
+<script src="./bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+<script src="./bower_components/ngprogress/build/ngprogress.min.js"></script>
+
+<!--<script src="./bower_components/angular-touch/angular-touch.min.js"></script>-->
+<!--<script src="./bower_components/angular-carousel/dist/angular-carousel.min.js"></script>-->
+
+
+<script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
+
+<script src="./src/app.js"></script>
+
+<!-- Layout module -->
+<script src="./src/Layout/MenuService.js"></script>
+<script src="./src/Layout/LayoutDirective.js"></script>
+<script src="./src/Layout/LayoutController.js"></script>
+<script src="./src/Layout/LayoutFilter.js"></script>
+
+<!--Learning module-->
+<script src="./src/Learning/LearningService.js"></script>
+<script src="./src/Learning/LearningController.js"></script>
+
+<script src="./src/Quiz/QuizService.js"></script>
+<script src="./src/Quiz/QuizController.js"></script>
+
+
+</body>
+</html>

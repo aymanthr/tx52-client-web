@@ -1,0 +1,94 @@
+
+<style>
+.w3-green{
+    color: #fff!important;
+    background-color: #F79837!important;
+}
+.w3-btn, .w3-btn-block {
+    border: none;
+    display: inline-block;
+    outline: 0;
+    padding: 6px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none!important;
+    color: #fff;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+</style>
+<div class="training-theme-selector">
+
+
+    <div layout="row" layout-align="space-around" ng-if="isOnLoad">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+
+    <md-list ng-cloak="" ng-show="!isOnLoad">
+        <md-subheader class="md-no-sticky">Sélectionnez les thèmes d'entrainement</md-subheader>
+
+ 
+  <div class="w3-btn w3-green ">Gestion environnementale</div>
+
+        <md-list-item ng-if="key < 4" ng-repeat="(key, tag)  in tags" class="item-tag-clickable" ng-class="{'active': tag.checked}">
+
+            <!-- <img ng-src="{{ tag.media.urls.crop }}"  class="md-avatar" alt="{{tag.name}}"> -->
+            <div class="md-list-item-text compact">
+                <h3>{{tag.name}}</h3>
+                <p>{{tag.questions_count}} questions disponibles</p>
+            </div>
+
+            <md-checkbox class="md-secondary" ng-model="tag.checked"></md-checkbox>
+        </md-list-item>
+ 
+    <div class="w3-btn w3-green ">Autres</div> 
+          <md-list-item  ng-repeat="(key, tag)  in tags" class="item-tag-clickable" ng-class="{'active': tag.checked}" ng-if="key > 3">
+              <div  > 
+            <!-- <img ng-src="{{ tag.media.urls.crop }}"  class="md-avatar" alt="{{tag.name}}"> -->
+            <div class="md-list-item-text compact">
+                <h3>{{tag.name}}</h3>
+                <p>{{tag.questions_count}} questions disponibles</p>
+            </div>
+             
+            <md-checkbox class="md-secondary" ng-model="tag.checked"></md-checkbox>
+             </div>
+        </md-list-item>
+ 
+        <md-divider></md-divider>
+
+        <md-subheader class="md-no-sticky">Choisissez le nombre de questions</md-subheader>
+
+        <md-list-item>
+            <md-radio-group ng-model="questionsCount" layout="row" layout-align="space-around center">
+                <md-radio-button ng-repeat="number in questionsCountSelection"
+                                 ng-value="number"
+                                 aria-label="number"
+                                >
+                    <label>{{ number }}</label>
+                </md-radio-button>
+            </md-radio-group>
+        </md-list-item>
+
+
+        <md-divider></md-divider>
+
+
+        <md-subheader class="md-no-sticky">Les <strong>{{ questionsCount }}</strong> questions porterons sur les thèmes suivants</md-subheader>
+        <md-chips>
+            <md-chip ng-repeat="tag in tags" ng-if="tag.checked" class="md-primary-bg md-hue-1">{{ tag.name }}</md-chip>
+        </md-chips>
+    </md-list>
+
+    <div layout="row" layout-align="center center" ng-if="!isOnLoad">
+        <button class="md-warn md-raised md-button md-default-theme btn-toggle-all" ng-click="startTraining()"><span class="ng-scope">Commencer l'entraînement</span><div class="md-ripple-container"></div></button>
+    </div>
+
+    <div class="whitespace"></div>
+
+</div>
+
+
+

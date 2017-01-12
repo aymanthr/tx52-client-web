@@ -1,0 +1,43 @@
+.toefl-content {
+  max-width: 100%;
+  padding-left: 10%;
+  padding-right: 10%; }
+
+.cardContent {
+  max-height: 20em; }
+
+#topDiv {
+  position: fixed !important;
+  display: none; }
+
+progress[value] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 250px;
+  height: 20px; }
+
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset; }
+
+progress[value]::-webkit-progress-value {
+  background-image: -webkit-linear-gradient(-45deg, transparent 33%, rgba(0, 0, 0, 0.1) 33%, rgba(0, 0, 0, 0.1) 66%, transparent 66%), -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.25)), -webkit-linear-gradient(left, #09c, #f44);
+  border-radius: 2px;
+  background-size: 35px 20px, 100% 100%, 100% 100%; }
+
+md-progress-circular {
+  transform: scale(0.3) !important; }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }
+
+.whitespace {
+  height: 25px;
+  width: 100%; }
+
+.toolbar-white {
+  background: #F2F2F2 !important;
+  color: black !important; }
+
+/*# sourceMappingURL=layout.css.map */

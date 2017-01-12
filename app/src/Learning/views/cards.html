@@ -1,0 +1,59 @@
+<div class="row" id="topDiv"></div>
+<div class="row">
+    <div layout="row" ng-if="!isOnLoad" class="ng-scope layout-row">
+        <button style="background-color: grey!important" class="md-warn md-raised md-button md-default-theme btn-toggle-all" onclick="window.location.href='index.html#/learning/list'"><span class="ng-scope">Revenir à la sélection des cours</span><div class="md-ripple-container"></div></button>
+    </div>
+</div>
+<div id="cards" >
+
+    <div layout="row" layout-align="space-around" ng-if="isOnLoad">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div class="row">
+
+        <md-tabs md-selected="selectedIndex" md-border-bottom  md-dynamic-height md-stretch-tabs>
+            <md-tab ng-repeat="card in cards"
+                    ng-disabled="card.disabled"
+                    label="{{card.title}}">
+
+                <p>Avancement du chapitre en cours  : <progress id="avancement" title="{{100 / (cards.length - (cards.indexOf(card)))}}%" value="{{100 / (cards.length - (cards.indexOf(card)))}}" max="100"></progress></p>
+
+                <img ng-src="{{ card.media.urls.wide}}" ng-if="card.media.urls.wide" class="card-img" alt="Washed Out">
+
+                <h2 class="md-title">{{ card.title}}</h2>
+                <div class="row">
+                    <div class="cardContent basicContent">
+                        <btf-markdown btf-markdown="card.content">
+                        </btf-markdown>
+
+                        <md-divider style='margin-bottom: 10px; margin-top: 10px'></md-divider>
+
+                        <p id="test"> Liste des tags associés : <a data-ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]" href="http://www.google.com/search?query={{card.tags[i].name}}" target="_blank">{{card.tags[i].name}} </a></p>
+                        <div class="row">
+                            <button style="background-color: #33ccff!important" class="md-warn md-raised md-button md-default-theme btn-toggle-all" ng-click="prevIndex()"><span class="ng-scope">Page précédente</span><div class="md-ripple-container"></div></button>
+                            <button style="background-color: #33ccff!important; margin-left: 60%" class="md-warn md-raised md-button md-default-theme btn-toggle-all" ng-click="nextIndex()"><span class="ng-scope">Page suivante</span><div class="md-ripple-container"></div></button>
+                        </div>
+                        <div class="row"></div>
+                    </div>
+                </div>
+
+
+
+            </md-tab>
+        </md-tabs>
+
+    </div>
+
+
+
+
+</div>
+<div class="row">
+    <div layout="row" layout-align="center center" ng-if="!isOnLoad" class="ng-scope layout-align-center-center layout-row">
+        <button style="background-color: grey!important" class="md-warn md-raised md-button md-default-theme btn-toggle-all seeMore" onclick="myFunction()"><span class="ng-scope">Afficher +</span><div class="md-ripple-container"></div></button>
+    </div>
+</div>
+
+
+
